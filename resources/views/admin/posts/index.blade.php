@@ -8,6 +8,7 @@
         </div>
     @endif
 
+    <h1>Posts</h1>
     <table class="table table-striped">
         <thead>
             <tr>

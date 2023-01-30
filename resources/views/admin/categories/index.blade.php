@@ -8,6 +8,7 @@
         </div>
     @endif
 
+    <h1>Categorie</h1>
     <table class="table table-striped">
         <thead>
             <tr>
