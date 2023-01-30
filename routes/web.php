@@ -29,4 +29,5 @@ Route::middleware('auth')
     ->group(function () {
         Route::get('/dashboard', 'HomeController@index')->name('name');
         Route::resource('posts', 'PostController');
+        Route::resource('categories', 'CategoryController');
 });
