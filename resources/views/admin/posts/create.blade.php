@@ -36,11 +36,12 @@
 
             <div class="mb-3">
                 <label for="category_id" class="form-label">Categoria</label>
-                <select class="form-select @error('category_id') is-invalid @enderror" id="category_id" name="category_id" aria-label="select example">
-                    <option value="">Selezionare una categoria</option>
+                <select class="form-select @error('category_id') is-invalid @enderror" id="category_id" name="category_id">
+
                     @foreach ($categories as $category)
                         <option value="{{ $category->id }}">{{ $category->name }}</option>
                     @endforeach
+
                 </select>
                 <div class="invalid-feedback">
                     @error('category_id')

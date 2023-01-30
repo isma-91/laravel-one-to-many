@@ -18,6 +18,8 @@ class PostController extends Controller
             'max:100',
         ],
         'title'          => 'required|string|max:100',
+        //Validation per le foreign key. Specifiche normali e poi vediamo nell'ultima pipe che diciamo che deve esistere nella tabella delle "categories" e nella colonna "id". Se non è presente ci riporta nel from dandoci erroe altrimenti prosegue correttamente.
+        'category_id'    => 'required|integer|exists:categories,id',
         'image'          => 'url|max:100',
         'uploaded_img'   => 'image|max:1024',
         'content'        => 'string',
@@ -59,7 +61,7 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->all());
+        // dd($request->all());
         $this->validations['slug'][]= 'unique:posts';
         $request->validate($this->validations);
 
@@ -76,7 +78,11 @@ class PostController extends Controller
 
         //Per importare un immagine nostra nella cartella "public".
         //Ricordarsi di creare PRIMA la cartella "uploads" nella cartella "public" dello "storage" originale!!!
-        $img_path = Storage::put('uploads', $data['uploaded_img']);
+        // Qui stiamo dicendo che se l'immagine è settata allora di usarla, ma se invece non viene inserito niente di lasciarlo null, vuoto, altrimenti da errore.
+        $img_path = isset($data['uploaded_img']) ? Storage::put('uploads', $data['uploaded_img']) : null;
+        //IN ALTERNATIVA
+        // $data['uploaded_img'] = $data['uploaded_img'] ?? '';
+        // $img_path = Storage::put('uploads', $data['uploaded_img']);
 
         //dd($post->content);
         $post = new Post;
