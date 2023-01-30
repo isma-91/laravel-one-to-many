@@ -11,8 +11,9 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        //Se le tabelle dei seeder qui sotto elencate sono collegate tra loro, mettere queste righe di seeder nell'ordine corretto così che venga popolata prima la tabella, che per esempio, deve fornire una chiave esterna ad un altra tabella, altrimenti quest'ultima verrebbe creata prima che sia presente la tabella che gli deve passare la chiave esterna e darebbe errore.
+        //Se le tabelle dei seeder qui sotto elencate sono collegate tra loro, mettere queste righe di seeder nell'ordine corretto così che venga popolata prima la tabella, che per esempio, deve fornire una chiave esterna ad un altra tabella, altrimenti quest'ultima verrebbe creata prima che sia presente la tabella che gli deve passare la chiave esterna e darebbe errore. Difatti abbiamo messo il "CategorySeeder" prima del "PostSeeder" per far si che venga prima popolata la tabella delle categories che po deve fornire la foreign key per la tabella dei posts. Se avessimo messo nell'ornine prima il "PostSeeder" avrebbe dato errore perchè nons arebbe stato possibile avere la foreign key per la tabella dato che la tabella delle categories non sarebbe stata ancora popolata.
         $this->call(UserSeeder::class);
+        $this->call(CategorySeeder::class);
         $this->call(PostSeeder::class);
     }
 }
